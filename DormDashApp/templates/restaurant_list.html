@@ -1,6 +1,6 @@
 {% extends "navbar.html" %}
   {% block content %}
-<p align="center" style="font-size: 40px;">Choose one of our tasty restaurants to get started!</p>
+<p align="center" style="font-size: 40px;font-family: Lobster;color:red;">Choose one of our tasty restaurants to get started!</p>
 
 <div align="center">
 <table class="" style="width: 30%;">
@@ -10,10 +10,10 @@
   <tr>
     
     <td style="width: 150px;padding-bottom: 1em;">
-      <a href="/"><img src="{{ entry.restaurant_pic.url }}" width="150" height="150"></a>
+      <a href="/restaurant_list"><img src="{{ entry.restaurant_pic.url }}" width="150" height="150"></a>
     </td>
     <td>
-      <a href="/"><p style="font-size: 20px;color: black;text-decoration: underline; text-decoration-color: white;">{{ entry.name}}</p></a>
+      <a href="/restaurant_list"><p style="font-size: 25px;color: rgba(0,0,0,.65);text-decoration: underline; text-decoration-color: white;">{{ entry.name}}</p></a>
     </td>
   
   </tr>
