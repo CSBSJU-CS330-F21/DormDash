@@ -17,7 +17,7 @@
 <table style=" margin-left:auto;margin-right:auto;margin-top: 10%;">
   <tr >
     <td valign="center" style="width: 300px">
-      <h6>Select A Order to Deliver For!</h6>
+      <h6>Select An Order to Deliver For!</h6>
       <form method="POST" action="">
         {% csrf_token %}
         <table>
@@ -25,10 +25,18 @@
             <th>Order</th>
             <th>Submit</th> 
           </tr>
-          <tr>
-            <td>Order1</td>
-            <td><button type="submit" class="btn btn-primary">Select Order</button></td>
+          {% for entry in ordersList %}
+            {% for name, value in entry.get_fields %}
+            {% if name == "campus" %}
+            <tr>
+            <td>{{name}} : {{value}}</td>
+            <td>  <a href = '/orderdetails' class="btn btn-primary">Select Order </a>
+              </td>
           </tr>
+          {% endif %}
+            {% endfor %}
+            {% endfor %}  
+          
         
         </table>
     </br>
@@ -41,12 +49,12 @@
 </body>
 </html>
 
-
+<!--
 <script type="text/javascript">
   var selectobject=document.getElementById("order select")
   for (var i=0; i<selectobject.length; i++){
   alert(selectobject.options[i].text+" "+selectobject.options[i].value)
   }
   
-  </script>
+  </script>-->
   {% endblock %}
