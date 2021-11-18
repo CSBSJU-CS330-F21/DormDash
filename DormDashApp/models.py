@@ -3,21 +3,42 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserM
 from django.db.models.fields import NullBooleanField
 from django.db import models
 from django.contrib.auth.models import User
-
+'''
 class menuItem(models.Model):
-    pass
+    name = models.TextField()
+    foodPic = models.ImageField(upload_to='images/')
 
+    def get_name(self):
+        return self.name
+
+    def get_fields(self):
+        return [(field.name, getattr(self,field.name)) for field in menuItem._meta.fields]
+
+    def upload_image(self, filename):
+        return 'menuItem/{}/{}'.format(self.title, filename)
+
+class OrderDetails(models.Model):
+    name = models.TextField()
+    menuItem = models.ForeignKey('menutItem', related_name='menuItem')
+    quantity = models.PositiveIntegerField()
+    price = models.FloatField()
+    def get_name(self):
+        return self.name
+
+    def get_fields(self):
+        return [(field.name, getattr(self,field.name)) for field in OrderDetails._meta.fields]
+'''
 class Order(models.Model):
-    resteraunt = models.CharField(max_length=100, null=True)
-    items = models.ManyToManyField(menuItem)
-    user = models.CharField(max_length = 100, null=True)
-    
-    def get_user(self):
-        return NullBooleanField
-    def get_items(self):
-        return NullBooleanField
-    def get_resteraunt(self):
-        return NullBooleanField
+    name = models.TextField()
+    addressStore = models.TextField()
+    campus = models.TextField()
+    address = models.TextField()
+    def get_name(self):
+        return self.name
+    def get_fields(self):
+        return [(field.name, getattr(self,field.name)) for field in Order._meta.fields]
+
+
 
 
 class Customer(models.Model):
