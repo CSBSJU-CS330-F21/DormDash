@@ -61,13 +61,13 @@ class ProfileChangeView(UpdateView):
     model = Customer
     form_class = ProfileChangeForm
     template_name = 'editprofile.html'
-    success_url = 'profile.html'
 
     def get_object(self):
         return self.request.user.customer
 
     def form_valid(self, form):
         messages.success(self.request, 'profile updated with success!')
+        self.success_url = self.request.POST.get('previous_page')
         return super().form_valid(form)
 
 

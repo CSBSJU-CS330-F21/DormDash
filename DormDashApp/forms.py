@@ -47,9 +47,10 @@ class DriverSignUpForm(UserCreationForm):
 
 class ProfileChangeForm(forms.ModelForm):
     phone_number = models.CharField(max_length=15)
+    email = models.CharField
     class Meta:
         model = Customer
-        fields = ('phone_number',)
+        fields = ('phone_number','email')
 
 '''
 class UpdateUserForm(forms.ModelForm):
