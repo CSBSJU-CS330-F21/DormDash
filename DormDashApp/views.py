@@ -53,7 +53,8 @@ def logoutUser(request):
     return redirect("/login")
 @login_required(login_url='login')
 def driverorders(request):
-    return render(request, 'driverorders.html')
+    ordersList = Order.objects.all()
+    return render(request, 'driverorders.html',{'ordersList':ordersList})
 
 def orderdetails(request):
     return render(request, 'orderdetails.html')
