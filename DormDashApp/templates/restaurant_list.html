@@ -1,18 +1,26 @@
 {% extends "navbar.html" %}
   {% block content %}
-This is the list of restaurants page
+<p align="center" style="font-size: 40px;">Choose one of our tasty restaurants to get started!</p>
 
-{% for entry in restaurantlist %}
-  <br>
-  {% for name, value in entry.get_fields %}
-    {% if name != "restaurant_pic" %}
-     {{name}} : {{value}}
-     <br>
-    {% else %}
-    <img src="{{ entry.restaurant_pic.url }}" width="200" height="200">
-     <br>
-    {% endif %}
-  {% endfor %}
-{% endfor %}  
+<div align="center">
+<table class="" style="width: 30%;">
+  {% for entry in restaurantlist %}
+    
+  
+  <tr>
+    
+    <td style="width: 150px;padding-bottom: 1em;">
+      <a href="/"><img src="{{ entry.restaurant_pic.url }}" width="150" height="150"></a>
+    </td>
+    <td>
+      <a href="/"><p style="font-size: 20px;color: black;text-decoration: underline; text-decoration-color: white;">{{ entry.name}}</p></a>
+    </td>
+  
+  </tr>
+
+{% endfor %} 
+</table>
+</div>
+ 
 
 {% endblock %}
