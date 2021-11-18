@@ -7,12 +7,15 @@ from DormDashApp.views import logoutUser
 
 # URLConf
 urlpatterns = [
-    path('createaccount/', views.createaccount),
+    path('signup/', views.SignUpView.as_view(), name = 'signup'),
+    path('createCustomer/', views.CustomerSignUpView.as_view(),name="createCustomer"),
+    path('createDriver/', views.DriverSignUpView.as_view(),name="createDriver"),
     path('', views.loginUser),
     path('restaurant_list/', views.restaurant_list, name="restaurant_list"),
     path('logout/', views.logoutUser, name="logout"),
     path('login/', views.loginUser, name="login"),
-    path('profile/', profile, name='users-profile'),
+    path('profile/', profile, name='profile'),
+    path('editprofile/', views.ProfileChangeView.as_view(), name='editprofile'),
     path('driverorders/',views.driverorders, name='driverorders'),
     path('orderdetails/',views.orderdetails, name='orderdetails'),
 

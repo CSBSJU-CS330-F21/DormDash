@@ -1,21 +1,15 @@
-from django.db.models.fields import EmailField
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.forms import inlineformset_factory
-from django.contrib.auth.forms import UserCreationForm
-
-from .forms import CreateUserForm
+from .forms import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UpdateUserForm, UpdateProfileForm
-
 from .models import *
-# Create your views here.
-# request -> response
-# request handle
-# action
+from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import TemplateView
 
+'''
 def createaccount(request):
     form = CreateUserForm()
     #pull data from DB
@@ -29,6 +23,54 @@ def createaccount(request):
 
     context = {'form':form}
     return render(request, 'createaccount.html', context)
+'''
+
+class SignUpView(TemplateView):
+    template_name = 'signup.html'
+
+
+class CustomerSignUpView(CreateView):
+    model = User
+    form_class = CustomerSignUpForm
+    template_name = 'signup_form.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['user_type'] = 'customer'
+        return super().get_context_data(**kwargs)
+    
+    def form_valid(self,form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('restaurant_list')
+        
+class DriverSignUpView(CreateView):
+    model = User
+    form_class = DriverSignUpForm
+    template_name = 'signup_form.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['user_type'] = 'driver'
+        return super().get_context_data(**kwargs)
+    
+    def form_valid(self,form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('driverorders')
+
+class ProfileChangeView(UpdateView):
+    model = Customer
+    form_class = ProfileChangeForm
+    template_name = 'editprofile.html'
+    success_url = 'profile.html'
+
+    def get_object(self):
+        return self.request.user.customer
+
+    def form_valid(self, form):
+        messages.success(self.request, 'profile updated with success!')
+        return super().form_valid(form)
+
+
 def loginUser(request):
     #pull data from DB
     #Transform
@@ -51,6 +93,7 @@ def loginUser(request):
 def logoutUser(request):
     logout(request)
     return redirect("/login")
+    
 @login_required(login_url='login')
 def driverorders(request):
     ordersList = Order.objects.all()
