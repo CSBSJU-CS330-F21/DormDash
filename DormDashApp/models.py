@@ -65,7 +65,7 @@ class User(AbstractUser):
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     phone_number = models.CharField(max_length=15)
-    email = models.CharField(max_length=15)
+    email = models.CharField(max_length=30)
     def __str__(self):
         return self.user.username
 
