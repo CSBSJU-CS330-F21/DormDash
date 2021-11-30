@@ -18,6 +18,7 @@ urlpatterns = [
     path('editprofile/', views.ProfileChangeView.as_view(), name='editprofile'),
     path('driverorders/',views.driverorders, name='driverorders'),
     path('orderdetails/',views.orderdetails, name='orderdetails'),
+    path('menu_list/', views.menu_list, name="menu_list"),
 
 
 ]
