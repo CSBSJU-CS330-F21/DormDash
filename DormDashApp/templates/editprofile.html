@@ -5,14 +5,9 @@
   <form method="post" novalidate>
     {% csrf_token %}
     {{ form|crispy }}
-    <button type="submit" class="btn btn-success">Save changes</button>
+    <a class="btn btn-primary" href="{% url 'profile' %}" role="button">Submit</a>
     <a href="{% url 'profile' %}" class="btn btn-outline-secondary">Nevermind</a>
   </form>
 
-  <script>
-    prev = document.getElementById("previous_page");
-    prev.value = document.referrer;
-</script>
-
-
   {% endblock %}
+  
