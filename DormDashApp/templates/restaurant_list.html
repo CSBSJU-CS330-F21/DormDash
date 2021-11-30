@@ -10,10 +10,10 @@
   <tr>
     
     <td style="width: 150px;padding-bottom: 1em;">
-      <a href="/restaurant_list"><img src="{{ entry.restaurant_pic.url }}" width="150" height="150"></a>
+      <a href="/menu_list/?rn={{ entry.name }}"><img src="{{ entry.restaurant_pic.url }}" width="150" height="150"></a>
     </td>
     <td>
-      <a href="/restaurant_list"><p style="font-size: 25px;color: rgba(0,0,0,.65);text-decoration: underline; text-decoration-color: white;">{{ entry.name}}</p></a>
+      <a href="/menu_list//?rn={{ entry.name }}"><p style="font-size: 25px;color: rgba(0,0,0,.65);text-decoration: underline; text-decoration-color: white;">{{ entry.name}}</p></a>
     </td>
   
   </tr>

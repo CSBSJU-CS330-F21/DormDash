@@ -5,18 +5,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 '''
-class menuItem(models.Model):
-    name = models.TextField()
-    foodPic = models.ImageField(upload_to='images/')
-
-    def get_name(self):
-        return self.name
-
-    def get_fields(self):
-        return [(field.name, getattr(self,field.name)) for field in menuItem._meta.fields]
-
-    def upload_image(self, filename):
-        return 'menuItem/{}/{}'.format(self.title, filename)
 
 class OrderDetails(models.Model):
     name = models.TextField()
@@ -56,7 +44,19 @@ class Restaurant(models.Model):
     def upload_image(self, filename):
         return 'restaurant/{}/{}'.format(self.title, filename)
 
+class menuItem(models.Model):
+    name = models.TextField()
+    food_pic = models.ImageField(upload_to='images/')
+    restaurant_name = models.TextField(default='none')
 
+    def get_name(self):
+        return self.name
+
+    def get_fields(self):
+        return [(field.name, getattr(self,field.name)) for field in menuItem._meta.fields]
+
+    def upload_image(self, filename):
+        return 'menuItem/{}/{}'.format(self.title, filename)
 
 class User(AbstractUser):
     is_customer = models.BooleanField(default=False)

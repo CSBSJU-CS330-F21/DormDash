@@ -8,6 +8,7 @@ from .models import *
 from django.views.generic import CreateView
 from django.views.generic import CreateView, ListView, UpdateView
 from django.views.generic import TemplateView
+import logging
 
 '''
 def createaccount(request):
@@ -105,9 +106,14 @@ def orderdetails(request):
 @login_required(login_url='login')
 def restaurant_list(request):
     restaurantlist = Restaurant.objects.all()
-    for x in restaurantlist:
-        print(x.get_name)
     return render(request, 'restaurant_list.html',{'restaurantlist':restaurantlist })
+
+@login_required(login_url='login')
+def menu_list(request):
+    menulist = menuItem.objects.all()
+    rn = request.GET.get('rn','')
+    restaurant_list = {'rn' : rn}
+    return render(request, 'menu_list.html',{'menulist':menulist, 'rn':rn})
 
 @login_required
 def profile(request):
