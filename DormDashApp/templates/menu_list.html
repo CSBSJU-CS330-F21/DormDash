@@ -5,7 +5,7 @@
 </p>
 
 <div align="center">
-<table class="" style="width: 30%;">
+<table class="" style="width: 40%;">
   {% for entry in menulist %}
     {% if entry.restaurant_name == rn %}
   
@@ -16,6 +16,8 @@
     </td>
     <td>
       <a href="#"><p style="font-size: 25px;color: rgba(0,0,0,.65);text-decoration: underline; text-decoration-color: white;">{{ entry.name}}</p></a>
+      <p style="font-size: 18px;color: rgba(53, 53, 53, 0.788);text-decoration: underline; text-decoration-color: white;">${{ entry.price}}</p>
+      <p style="font-size: 18px;color: rgba(53, 53, 53, 0.788);text-decoration: underline; text-decoration-color: white;">{{ entry.description}}</p>
     </td>
   
   </tr>

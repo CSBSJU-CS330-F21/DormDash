@@ -48,6 +48,8 @@ class menuItem(models.Model):
     name = models.TextField()
     food_pic = models.ImageField(upload_to='images/')
     restaurant_name = models.TextField(default='none')
+    price = models.DecimalField(default=0.00, decimal_places=2, max_digits=6)
+    description = models.TextField(default='Other', max_length=144)
 
     def get_name(self):
         return self.name
