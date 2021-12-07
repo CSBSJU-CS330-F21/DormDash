@@ -51,6 +51,16 @@ class menuItem(models.Model):
     price = models.DecimalField(default=0.00, decimal_places=2, max_digits=6)
     description = models.TextField(default='Other', max_length=144)
 
+    FOOD_TYPES = (
+        ('A', 'Appetizer'),
+        ('E', 'Entree'),
+        ('D', 'Dessert'),
+        ('S', 'Side'),
+        ('R', 'Drink')
+    )
+
+    food_type = models.TextField(max_length=1,choices=FOOD_TYPES)
+
     def get_name(self):
         return self.name
 
