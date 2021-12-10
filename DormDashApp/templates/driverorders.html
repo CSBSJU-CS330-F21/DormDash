@@ -15,22 +15,22 @@
 <body>
  
 <table style=" margin-left:auto;margin-right:auto;margin-top: 10%;">
-  <tr >
-    <td valign="center" style="width: 300px">
-      <h6>Select An Order to Deliver For!</h6>
+  <tr style='font-family: Lobster;'>
+    <td align="center" style="width: 600px; font-size: 80px;">
+      <h6 style='font-size: 400%;margin-left:auto;margin-right:auto;margin-top: 10%;'></h6>Select An Order to Deliver For!</h6>
       <form method="POST" action="">
         {% csrf_token %}
-        <table>
-          <tr>
-            <th>Order</th>
-            <th>Submit</th> 
+        <table style= "margin-left:auto;margin-right:auto;margin-top: 10%;">
+          <tr align="center">
+            <th  style ='font-size: 50px;'>Order</th>
+            <th style ='font-size: 50px;'>Submit</th> 
           </tr>
           {% for entry in ordersList %}
             {% for name, value in entry.get_fields %}
             {% if name == "campus" %}
-            <tr>
-            <td>{{name}} : {{value}}</td>
-            <td>  <a href = '/orderdetails' class="btn btn-primary">Select Order </a>
+            <tr align="center">
+            <td style='font-size: 60px;'>{{name}}: {{value}}</td>
+            <td>  <a href = '/orderdetails' style='background-color:white;color:red;width:200px;height: 80px;'type="button_css">Select Order </a>
               </td>
           </tr>
           {% endif %}
@@ -58,3 +58,9 @@
   
   </script>-->
   {% endblock %}
+  .button_css{
+    background-color: red;
+    color:white;
+    width:150px;
+    height;40px;
+  }
