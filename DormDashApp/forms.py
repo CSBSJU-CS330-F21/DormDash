@@ -1,15 +1,9 @@
 from django import forms
+from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from .models import *
 
-'''
-class CreateUserForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields =['username','email', 'password1', 'password2']
-
-'''
 
 class CustomerSignUpForm(UserCreationForm):
     phone_number = forms.CharField(max_length=100,
@@ -23,14 +17,15 @@ class CustomerSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
 
+        
     @transaction.atomic
     def save(self):
         user = super().save(commit=False)
         user.is_customer = True
+        '''user.phone_number = ('phone_number')
+        user.email = ('email')'''
         user.save()
         customer = Customer.objects.create(user=user)
-        customer.phone_number = ('phone_number')
-        customer.email = ('email')
         return user
 
 
@@ -41,15 +36,15 @@ class DriverSignUpForm(UserCreationForm):
     def save(self, commit = True):
         user = super().save(commit=False)
         user.is_driver = True
+        '''user.phone_number = ('phone_number')
+        user.email = ('email')'''
         if commit:
             user.save()
         return user
 
 class ProfileChangeForm(forms.ModelForm):
-    phone_number = models.CharField(max_length=15)
-    email = models.CharField
     class Meta:
-        model = Customer
+        model = User
         fields = ('phone_number','email')
 
 '''

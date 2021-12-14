@@ -16,6 +16,7 @@ urlpatterns = [
     path('login/', views.loginUser, name="login"),
     path('profile/', profile, name='profile'),
     path('editprofile/', views.ProfileChangeView.as_view(), name='editprofile'),
+    path('deleteprofile/', views.ProfileDeleteView.as_view(), name='deleteprofile'),
     path('driverorders/',views.driverorders, name='driverorders'),
     path('orderdetails/',views.orderdetails, name='orderdetails'),
     path('menu_list/', views.menu_list, name="menu_list"),

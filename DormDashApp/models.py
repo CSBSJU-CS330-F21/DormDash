@@ -29,7 +29,6 @@ class Order(models.Model):
         return [(field.name, getattr(self,field.name)) for field in Order._meta.fields]
 
 
-
 class Restaurant(models.Model):
     name = models.TextField()
     address = models.TextField()
@@ -73,11 +72,12 @@ class menuItem(models.Model):
 class User(AbstractUser):
     is_customer = models.BooleanField(default=False)
     is_driver = models.BooleanField(default=False)
+    phone_number = models.CharField(max_length=15, default='0000')
+    email = models.CharField(max_length=30, default= '000@000.com')
 
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    phone_number = models.CharField(max_length=15)
-    email = models.CharField(max_length=30)
+    
     def __str__(self):
         return self.user.username
 

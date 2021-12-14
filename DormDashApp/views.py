@@ -6,8 +6,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import *
 from django.views.generic import CreateView
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.views.generic import TemplateView
+from django.urls import reverse_lazy
 import logging
 
 '''
@@ -59,18 +60,33 @@ class DriverSignUpView(CreateView):
         return redirect('driverorders')
 
 class ProfileChangeView(UpdateView):
-    model = Customer
+    model = User
     form_class = ProfileChangeForm
     template_name = 'editprofile.html'
 
     def get_object(self):
-        return self.request.user.customer
+        return self.request.user
+    
+    def form_valid(self,form):
+        self.success_url = 'profile.html'
+        return super().form_valid(form)
+
+class ProfileDeleteView(DeleteView):
+    model = User
+    sucess_url = reverse_lazy('login.html')
+        
+
+'''
+        if self.request.user.is_customer:
+            return self.request.user.customer
+        else:
+            return self.request.user.driver
 
     def form_valid(self, form):
         messages.success(self.request, 'profile updated with success!')
         self.success_url = self.request.POST.get('previous_page')
         return super().form_valid(form)
-
+'''
 
 def loginUser(request):
     #pull data from DB
